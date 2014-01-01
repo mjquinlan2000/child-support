@@ -8,6 +8,8 @@ ChildSupport::Application.routes.draw do
 
   root to: 'home#index'
 
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+
   namespace :api, default: {format: :json} do
     resources :genders
     resources :record_types
