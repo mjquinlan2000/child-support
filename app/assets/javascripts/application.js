@@ -13,4 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//= require angularjs/angular.min
+//= require angularjs/angular-route.min
+//= require angularjs/angular-sanitize.min
+//= require main
+//= require_tree ./app
