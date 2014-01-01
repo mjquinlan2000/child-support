@@ -1,0 +1,2 @@
+module Api::ClientRecordsHelper
+end

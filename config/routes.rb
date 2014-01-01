@@ -7,4 +7,11 @@ ChildSupport::Application.routes.draw do
   # resources :users
 
   root to: 'home#index'
+
+  namespace :api, default: {format: :json} do
+    resources :genders
+    resources :record_types
+    resources :client_records
+    resources :clients
+  end
 end
