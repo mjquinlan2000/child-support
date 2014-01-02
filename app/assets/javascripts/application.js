@@ -16,5 +16,6 @@
 //= require angularjs/angular.min
 //= require angularjs/angular-route.min
 //= require angularjs/angular-sanitize.min
+//= require underscore/underscore
 //= require main
 //= require_tree ./app

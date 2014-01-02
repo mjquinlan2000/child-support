@@ -11,6 +11,8 @@ class CreateClients < ActiveRecord::Migration
       t.integer :maintenance_received, default: 0
       t.integer :overnights, default: 0
       t.integer :children, default: 1
+      t.integer :maintenance_paid, default: 0
+      t.integer :maintenance_received, default: 0
 
       t.timestamps
     end

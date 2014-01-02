@@ -17,5 +17,7 @@ ChildSupport::Application.routes.draw do
     resources :clients do
       resources :client_records
     end
+
+    get '/support_schedule' => 'support_schedule#show'
   end
 end

@@ -12,17 +12,23 @@
 %input{type: 'number', 'ng-model' => 'client.income', 'ng-change' => 'onClientChanged()'}
 %label Spouse's Monthly Income
 %input{type: 'number', 'ng-model' => 'client.spouse_income', 'ng-change' => 'onClientChanged()'}
+%label Maintenance Paid
+%input{type: 'number', 'ng-model' => 'client.maintenance_paid', 'ng-change' => 'onClientChanged()'}
+%label Maintenance Received
+%input{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()'}
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th Type
-      %th Amount
-  %tbody
-    %tr{'ng-repeat' => 'record in client_records'}
-      %td
-        %select{'ng-model' => 'record.record_type_id', 'ng-options' => 'rt.id as rt.name for rt in record_types', 'ng-change' => 'onClientRecordChanged(record)'}
-      %td
-        %input{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)'}
+%h1 {{calculatedSupport}}
 
-%button.btn.add-button.pull-right{'ng-click' => 'addClientRecord()'} ADD ENTRY
+/ %table.table.table-striped
+/   %thead
+/     %tr
+/       %th Type
+/       %th Amount
+/   %tbody
+/     %tr{'ng-repeat' => 'record in client_records'}
+/       %td
+/         %select{'ng-model' => 'record.record_type_id', 'ng-options' => 'rt.id as rt.name for rt in record_types', 'ng-change' => 'onClientRecordChanged(record)'}
+/       %td
+/         %input{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)'}
+
+/ %button.btn.add-button.pull-right{'ng-click' => 'addClientRecord()'} ADD ENTRY

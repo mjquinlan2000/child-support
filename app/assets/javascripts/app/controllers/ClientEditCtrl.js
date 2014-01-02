@@ -1,5 +1,5 @@
 angular.module('childSupportApp')
-  .controller('ClientEditCtrl', function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType) {
+  .controller('ClientEditCtrl', function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType, SupportSchedule) {
     $scope.recordTimeouts = {};
     Gender.then(function(data) {
       $scope.genders = data;
@@ -12,8 +12,7 @@ angular.module('childSupportApp')
     Client.getClient($routeParams.id).then(function(data) {
       $scope.client = data;
     }, function(error) {
-      $log.error(JSON.stringify(error));
-      $location.path('/clients/new');
+      $location.path('/');
     });
 
     ClientRecord.getByClientId($routeParams.id).then(function(records) {
@@ -29,6 +28,7 @@ angular.module('childSupportApp')
     };
 
     $scope.onClientChanged = function(){
+      $scope.calculateChildSupport();
       $timeout.cancel($scope.clientTimeout);
       $scope.clientTimeout = $timeout(function(){
         Client.updateClient($scope.client);
@@ -40,5 +40,48 @@ angular.module('childSupportApp')
       $scope.recordTimeouts[record.id] = $timeout(function(){
         ClientRecord.updateClientRecord($scope.client.id, record);
       }, 3000);
+    };
+
+    $scope.calculateChildSupport = function(){
+      var adjustedIncomeClient =
+        $scope.client.income
+        + $scope.client.maintenance_received
+        - $scope.client.maintenance_paid;
+
+      var adjustedIncomeSpouse =
+        $scope.client.spouse_income
+        - $scope.client.maintenance_received
+        + $scope.client.maintenance_paid;
+
+      var totalIncome = $scope.client.income + $scope.client.spouse_income;
+
+      SupportSchedule.then(function(schedule){
+        var roundedIncome = parseInt(totalIncome/50)*50;
+        if(roundedIncome < 1100) roundedIncome = 0;
+        var numChildren = Math.min(6, $scope.client.children);
+        var scheduleLow = parseInt(_.filter(schedule, function(entry){
+          return parseInt(entry.income) == roundedIncome;
+        })[0][numChildren]);
+
+        var scheduleHigh = parseInt(_.filter(schedule, function(entry){
+          return parseInt(entry.income) == roundedIncome + 50;
+        })[0][numChildren]);
+
+        var difference = scheduleHigh - scheduleLow;
+        var newPayment = (difference *(totalIncome - roundedIncome)/50)+scheduleLow;
+        var clientIncomePercent = adjustedIncomeClient/totalIncome;
+        var spouseIncomePercent = 1 - clientIncomePercent;
+
+        var clientSupportObligation = clientIncomePercent * newPayment;
+        var spouseSupportObligation = spouseIncomePercent * newPayment;
+
+        var clientOvernightPercent = $scope.client.overnights/365;
+        var spouseOvernightPercent = 1 - clientOvernightPercent;
+
+        var clientObligationWithTime = spouseOvernightPercent * clientSupportObligation;
+        var spouseObligationWithTime = clientOvernightPercent * spouseSupportObligation;
+
+        $scope.calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
+      });
     };
   });

@@ -6,5 +6,7 @@ json.(
   :children,
   :spouse_income,
   :income,
-  :overnights
+  :overnights,
+  :maintenance_paid,
+  :maintenance_received
 )

@@ -1,6 +1,13 @@
 class Client < ActiveRecord::Base
-  # attr_accessible :title, :body
-  attr_accessible :name, :user_id, :gender_id, :income, :overnights, :children, :spouse_income
+  attr_accessible :name,
+                  :user_id,
+                  :gender_id,
+                  :income,
+                  :overnights,
+                  :children,
+                  :spouse_income,
+                  :maintenance_paid,
+                  :maintenance_received
 
   has_one :user
   has_one :gender
