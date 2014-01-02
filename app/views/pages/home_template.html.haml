@@ -5,6 +5,6 @@
 %table.table.table-striped
   %tbody
     %tr{'client-table-entry' => 'client', 'ng-repeat' => 'client in clients'}
-%button.pull-right.btn
+%button.pull-right.btn{'ng-click' => 'addNewClient()'}
   %i.icon-plus
   %span ADD CLIENT

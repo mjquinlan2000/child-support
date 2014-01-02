@@ -1,5 +1,5 @@
 angular.module('childSupportApp')
-  .controller('HomeCtrl', function($scope, $log, Client){
+  .controller('HomeCtrl', function($scope, $location, $log, Client){
     $scope.clients = [];
 
     Client.all()
@@ -7,4 +7,8 @@ angular.module('childSupportApp')
         $scope.clients = data;
         console.log($scope.clients);
       });
+
+    $scope.addNewClient = function(){
+      $location.path('/clients/new');
+    };
   });
