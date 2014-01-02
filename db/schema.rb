@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20140101223243) do
 
   create_table "client_records", :force => true do |t|
+    t.integer  "client_id",      :null => false
     t.integer  "record_type_id"
     t.float    "amount"
     t.boolean  "is_subtracted"

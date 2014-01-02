@@ -8,6 +8,10 @@ angular.module('childSupportApp')
       });
 
     $scope.addNewClient = function(){
-      $location.path('/clients/new');
+      Client.newClient({
+        name: ''
+      }).then(function(newClient){
+        $location.path('/clients/'+newClient.id);
+      });
     };
   });
