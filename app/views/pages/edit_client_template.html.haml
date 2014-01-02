@@ -1,6 +1,17 @@
+%label Name
 %input{type: 'text', 'ng-model' => 'client.name', 'ng-change' => 'onClientChanged()'}
 %br
+%label Gender
 %select{'ng-model' => 'client.gender_id', 'ng-options' => 'gender.id as gender.name for gender in genders', 'ng-change' => 'onClientChanged()'}
+
+%label No. Children
+%input{type: 'number', 'ng-model' => 'client.children', 'ng-change' => 'onClientChanged()'}
+%label Overnights
+%input{type: 'number', 'ng-model' => 'client.overnights', 'ng-change' => 'onClientChanged()'}
+%label Monthly Income
+%input{type: 'number', 'ng-model' => 'client.income', 'ng-change' => 'onClientChanged()'}
+%label Spouse's Monthly Income
+%input{type: 'number', 'ng-model' => 'client.spouse_income', 'ng-change' => 'onClientChanged()'}
 
 %table.table.table-striped
   %thead

@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(:version => 20140101223243) do
     t.integer  "client_id",      :null => false
     t.integer  "record_type_id"
     t.float    "amount"
-    t.boolean  "is_subtracted"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -26,8 +25,14 @@ ActiveRecord::Schema.define(:version => 20140101223243) do
     t.integer  "user_id"
     t.integer  "gender_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "income",               :default => 0
+    t.integer  "spouse_income",        :default => 0
+    t.integer  "maintenance_paid",     :default => 0
+    t.integer  "maintenance_received", :default => 0
+    t.integer  "overnights",           :default => 0
+    t.integer  "children",             :default => 1
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "genders", :force => true do |t|
@@ -36,9 +41,10 @@ ActiveRecord::Schema.define(:version => 20140101223243) do
 
   create_table "record_types", :force => true do |t|
     t.string   "name"
-    t.boolean  "is_monetary"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.boolean  "is_monetary",   :default => true
+    t.boolean  "is_subtracted", :default => true
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "roles", :force => true do |t|

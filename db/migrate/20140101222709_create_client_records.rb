@@ -4,7 +4,6 @@ class CreateClientRecords < ActiveRecord::Migration
       t.integer :client_id, null: false
       t.integer :record_type_id
       t.float :amount
-      t.boolean :is_subtracted
 
       t.timestamps
     end

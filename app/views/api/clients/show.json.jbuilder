@@ -2,5 +2,9 @@ json.(
   @client,
   :id,
   :name,
-  :gender_id
+  :gender_id,
+  :children,
+  :spouse_income,
+  :income,
+  :overnights
 )

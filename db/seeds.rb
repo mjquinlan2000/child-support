@@ -21,12 +21,7 @@ user.add_role :admin
   Gender.find_or_create_by_name name: name
 end
 
-
-['Client Overnights'].each do |type|
-  RecordType.find_or_create_by_name name: type, is_monetary: false
-end
-
-monetary_types = ["Client's Monthly Income", "Spouse's Monthly Income", "Maintenance Received Monthly", "Maintenance Given Monthly"]
-monetary_types.each do |type|
-  RecordType.find_or_create_by_name name: type, is_monetary: true
-end
+RecordType.find_or_create_by_name(name: 'Maintenance Paid to Spouse')
+RecordType.find_or_create_by_name(name: 'Maintenance Received from Spouse', is_subtracted: false)
+RecordType.find_or_create_by_name(name: 'Child Health Insurance Paid')
+RecordType.find_or_create_by_name(name: 'Child Health Insurance Received', is_subtracted: false)
