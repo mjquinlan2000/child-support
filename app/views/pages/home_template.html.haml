@@ -1,4 +1,10 @@
 %h1 Your Clients
-.client-list
-  .client-list-entry{'ng-repeat' => 'client in clients'}
-    {{client.name}}
+/ .client-list
+/   .client-list-entry{'ng-repeat' => 'client in clients'}
+/     {{client.name}}
+%table.table.table-striped
+  %tbody
+    %tr{'client-table-entry' => 'client', 'ng-repeat' => 'client in clients'}
+%button.pull-right.btn
+  %i.icon-plus
+  %span ADD CLIENT

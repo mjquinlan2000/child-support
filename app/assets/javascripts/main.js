@@ -1,5 +1,8 @@
 angular.module('childSupportApp', ['ngRoute', 'ngSanitize'])
   .config(function($routeProvider){
     $routeProvider
-      .when('/', {controller: 'HomeCtrl', templateUrl: 'pages/home_template.html'});
-  })
+      .when('/', {controller: 'HomeCtrl', templateUrl: 'pages/home_template.html'})
+      .when('/clients/new', {controller: 'ClientEditCtrl', templateUrl: 'pages/edit_client_template.html'})
+      .when('/clients/:id', {controller: 'ClientEditCtrl', templateUrl: 'pages/edit_client_template.html'})
+      .otherwise({redirectTo: '/'});
+  });
