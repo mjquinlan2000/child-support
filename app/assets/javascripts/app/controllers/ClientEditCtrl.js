@@ -11,6 +11,7 @@ angular.module('childSupportApp')
 
     Client.getClient($routeParams.id).then(function(data) {
       $scope.client = data;
+      $scope.calculateChildSupport();
     }, function(error) {
       $location.path('/');
     });
