@@ -1,1 +1,1 @@
-json.array! @client_records, :record_type_id, :client_id, :is_subtracted, :amount, :client_id, :id
+json.array! @client_records, :record_type_id, :client_id, :is_subtracted, :amount, :id

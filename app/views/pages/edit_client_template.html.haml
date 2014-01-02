@@ -10,8 +10,8 @@
   %tbody
     %tr{'ng-repeat' => 'record in client_records'}
       %td
-        %select{'ng-model' => 'record.record_type_id', 'ng-options' => 'rt.id as rt.name for rt in record_types'}
+        %select{'ng-model' => 'record.record_type_id', 'ng-options' => 'rt.id as rt.name for rt in record_types', 'ng-change' => 'onClientRecordChanged(record)'}
       %td
-        %input{type: 'number', 'ng-model' => 'record.amount'}
+        %input{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)'}
 
 %button.btn.add-button.pull-right{'ng-click' => 'addClientRecord()'} ADD ENTRY

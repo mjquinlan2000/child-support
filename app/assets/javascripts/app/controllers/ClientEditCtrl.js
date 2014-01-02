@@ -1,5 +1,6 @@
 angular.module('childSupportApp')
   .controller('ClientEditCtrl', function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType) {
+    $scope.recordTimeouts = {};
     Gender.then(function(data) {
       $scope.genders = data;
     });
@@ -20,16 +21,24 @@ angular.module('childSupportApp')
     });
 
     $scope.addClientRecord = function(){
-      console.log('here');
-      $scope.client_records.push({
+      ClientRecord.newClientRecord($scope.client.id, {
         amount: 0
-      });
+      }).then(function(newRecord){
+        $scope.client_records.push(newRecord);
+      })
     };
 
     $scope.onClientChanged = function(){
       $timeout.cancel($scope.clientTimeout);
       $scope.clientTimeout = $timeout(function(){
         Client.updateClient($scope.client);
-      }, 5000);
+      }, 3000);
+    };
+
+    $scope.onClientRecordChanged = function(record){
+      $timeout.cancel($scope.recordTimeouts[record.id]);
+      $scope.recordTimeouts[record.id] = $timeout(function(){
+        ClientRecord.updateClientRecord($scope.client.id, record);
+      }, 3000);
     };
   });
