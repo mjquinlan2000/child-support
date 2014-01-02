@@ -5,7 +5,6 @@ angular.module('childSupportApp')
     Client.all()
       .then(function(data){
         $scope.clients = data;
-        console.log($scope.clients);
       });
 
     $scope.addNewClient = function(){

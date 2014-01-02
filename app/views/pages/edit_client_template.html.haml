@@ -1,3 +1,17 @@
 %input{type: 'text', 'ng-model' => 'client.name'}
 %br
 %select{'ng-model' => 'client.gender_id', 'ng-options' => 'gender.id as gender.name for gender in genders'}
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Type
+      %th Amount
+  %tbody
+    %tr{'ng-repeat' => 'record in client_records'}
+      %td
+        %select{'ng-model' => 'record.record_type_id', 'ng-options' => 'rt.id as rt.name for rt in record_types'}
+      %td
+        %input{type: 'number', 'ng-model' => 'record.amount'}
+
+%button.btn.add-button.pull-right{'ng-click' => 'addClientRecord()'} ADD ENTRY

@@ -13,7 +13,9 @@ ChildSupport::Application.routes.draw do
   namespace :api, default: {format: :json} do
     resources :genders
     resources :record_types
-    resources :client_records
-    resources :clients
+    # resources :client_records
+    resources :clients do
+      resources :client_records
+    end
   end
 end

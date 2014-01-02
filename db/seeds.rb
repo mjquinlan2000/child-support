@@ -20,3 +20,13 @@ user.add_role :admin
 ['Female', 'Male'].each do |name|
   Gender.find_or_create_by_name name: name
 end
+
+
+['Client Overnights'].each do |type|
+  RecordType.find_or_create_by_name name: type, is_monetary: false
+end
+
+monetary_types = ["Client's Monthly Income", "Spouse's Monthly Income", "Maintenance Received Monthly", "Maintenance Given Monthly"]
+monetary_types.each do |type|
+  RecordType.find_or_create_by_name name: type, is_monetary: true
+end
