@@ -1,1 +1,3 @@
-%h1 wut
+%input{type: 'text', 'ng-model' => 'client.name'}
+%br
+%select{'ng-model' => 'client.gender_id', 'ng-options' => 'gender.id as gender.name for gender in genders'}

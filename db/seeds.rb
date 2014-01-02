@@ -16,3 +16,7 @@ puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => 'Default User'.dup, :email => 'default@example.com'.dup, :password => 'password'.dup, :password_confirmation => 'password'.dup
 puts 'user: ' << user.name
 user.add_role :admin
+
+['Female', 'Male'].each do |name|
+  Gender.find_or_create_by_name name: name
+end

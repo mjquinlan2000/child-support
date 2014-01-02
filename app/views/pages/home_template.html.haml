@@ -4,7 +4,11 @@
 /     {{client.name}}
 %table.table.table-striped
   %tbody
-    %tr{'client-table-entry' => 'client', 'ng-repeat' => 'client in clients'}
+    %tr{'ng-repeat' => 'client in clients'}
+      %td {{client.name}}
+      %td
+        %a.btn.pull-right{href: '#/clients/{{client.id}}'} EDIT
+        %button.btn.pull-right DELETE
 %button.pull-right.btn{'ng-click' => 'addNewClient()'}
   %i.icon-plus
   %span ADD CLIENT
