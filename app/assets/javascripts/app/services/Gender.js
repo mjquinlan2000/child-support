@@ -1,12 +1,14 @@
 angular.module('childSupportApp')
-  .factory('Gender', function($http, $log, $q){
-    var deferred = $q.defer();
-    $http.get('/api/genders.json')
-      .success(function(data){
-        deferred.resolve(data);
-      }).error(function(error){
-        deferred.reject(error);
-      });
+  .factory('Gender', ['$http', '$log', '$q',
+    function($http, $log, $q) {
+      var deferred = $q.defer();
+      $http.get('/api/genders.json')
+        .success(function(data) {
+          deferred.resolve(data);
+        }).error(function(error) {
+          deferred.reject(error);
+        });
 
-    return deferred.promise;
-  });
+      return deferred.promise;
+    }
+  ]);
