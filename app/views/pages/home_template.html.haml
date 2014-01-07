@@ -1,14 +1,17 @@
-%h1 Your Clients
-/ .client-list
-/   .client-list-entry{'ng-repeat' => 'client in clients'}
-/     {{client.name}}
-%table.table.table-striped
-  %tbody
-    %tr{'ng-repeat' => 'client in clients'}
-      %td {{client.name}}
-      %td
-        %a.btn.pull-right{href: '#/clients/{{client.id}}'} EDIT
-        %button.btn.pull-right{'ng-click' => 'deleteClient(client)'} DELETE
-%button.pull-right.btn{'ng-click' => 'addNewClient()'}
-  %i.icon-plus
-  %span ADD CLIENT
+.row
+  %h1 Your Clients
+  / .client-list
+  /   .client-list-entry{'ng-repeat' => 'client in clients'}
+  /     {{client.name}}
+  %table.table.table-striped.home-client-table
+    %tbody
+      %tr{'ng-repeat' => 'client in clients'}
+        %td {{client.name}}
+        %td
+          %a.btn.btn-primary.pull-right.edit-button{href: '#/clients/{{client.id}}'} EDIT
+          %button.btn.btn-danger.pull-right.delete-button{'ng-click' => 'deleteClient(client)'} DELETE
+      %tr
+        %td{colspan: "2"}
+          %button.btn-success.pull-right.btn.add-client-button{'ng-click' => 'addNewClient()'}
+            %i.icon-plus
+            %span ADD CLIENT

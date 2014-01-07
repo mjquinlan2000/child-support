@@ -12,10 +12,5 @@
     / %header
     /   = render 'layouts/navigation'
     %main{:role => "main"}
-      .container{'ng-app' => 'childSupportApp'}
-        .content
-          .row
-            .span12{'ng-view' => true}
-              / = render 'layouts/messages'
-              / = yield
-          %footer
+      .container{'ng-app' => 'childSupportApp', 'ng-view' => true}
+      %footer
