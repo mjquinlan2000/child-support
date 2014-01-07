@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap/bootstrap
 //= require angularjs/angular
 //= require angularjs/angular-route
 //= require angularjs/angular-sanitize
