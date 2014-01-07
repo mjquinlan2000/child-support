@@ -66,7 +66,7 @@ angular.module('childSupportApp')
           })[0][numChildren]);
 
           var difference = scheduleHigh - scheduleLow;
-          var newPayment = (difference * (totalIncome - roundedIncome) / 50) + scheduleLow;
+          var newPayment = ((difference * (totalIncome - roundedIncome) / 50) + scheduleLow)*1.5;
           var clientIncomePercent = adjustedIncomeClient / totalIncome;
           var spouseIncomePercent = 1 - clientIncomePercent;
 
@@ -79,7 +79,15 @@ angular.module('childSupportApp')
           var clientObligationWithTime = spouseOvernightPercent * clientSupportObligation;
           var spouseObligationWithTime = clientOvernightPercent * spouseSupportObligation;
 
-          $scope.calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
+          var calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
+
+          if(calculatedSupport < 0){
+            var prefix = 'Your client pays $';
+          }else{
+            var prefix = 'Your client receives $';
+          }
+
+          $scope.calculatedSupport = prefix+Math.abs(calculatedSupport).toFixed(2)+'/mo';
         });
       };
     }

@@ -11,5 +11,5 @@ class Client < ActiveRecord::Base
 
   has_one :user
   has_one :gender
-  has_many :client_records
+  has_many :client_records, dependent: :delete_all
 end

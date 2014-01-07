@@ -20,4 +20,14 @@ class Api::ClientsController < ApplicationController
 
     render :show, formats: [:json]
   end
+
+  def destroy
+    @client = Client.find(params[:id])
+
+    @client.destroy
+
+    respond_to do |f|
+      f.json { head :ok }
+    end
+  end
 end

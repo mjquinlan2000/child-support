@@ -55,6 +55,21 @@ angular.module('childSupportApp')
             });
 
           return deferred.promise;
+        },
+
+        destroyClient: function(clientId){
+          var deferred = $q.defer();
+
+          $http({method: 'DELETE', url: 'api/clients/'+clientId+'.json'})
+            .success(function(data){
+              deferred.resolve(data);
+            })
+            .error(function(error){
+              $log.error('Could not delete client with id: '+clientId+'\n'+error);
+              deferred.reject(error);
+            });
+
+          return deferred.promise;
         }
       };
     }

@@ -15,5 +15,15 @@ angular.module('childSupportApp')
           $location.path('/clients/' + newClient.id);
         });
       };
+
+      $scope.deleteClient = function(client){
+        Client.destroyClient(client.id).then(function(){
+          $log.info('client deleted successfully!')
+          $scope.clients = _.reject($scope.clients, function(existing){
+            return existing.id == client.id;
+          });
+        });
+
+      };
     }
   ]);

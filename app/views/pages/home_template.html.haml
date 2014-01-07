@@ -8,7 +8,7 @@
       %td {{client.name}}
       %td
         %a.btn.pull-right{href: '#/clients/{{client.id}}'} EDIT
-        %button.btn.pull-right DELETE
+        %button.btn.pull-right{'ng-click' => 'deleteClient(client)'} DELETE
 %button.pull-right.btn{'ng-click' => 'addNewClient()'}
   %i.icon-plus
   %span ADD CLIENT
