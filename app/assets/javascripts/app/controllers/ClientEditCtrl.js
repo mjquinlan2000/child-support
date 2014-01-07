@@ -1,32 +1,35 @@
 angular.module('childSupportApp')
   .controller('ClientEditCtrl', ['$scope', '$timeout', '$routeParams', '$location', '$log', 'Client', 'Gender', 'ClientRecord', 'RecordType', 'SupportSchedule',
     function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType, SupportSchedule) {
+      'use strict';
+
       $scope.recordTimeouts = {};
       Gender.then(function(data) {
         $scope.genders = data;
-      });
-
-      RecordType.then(function(data) {
-        $scope.record_types = data;
-      });
-
-      Client.getClient($routeParams.id).then(function(data) {
+        return RecordType;
+      })
+      .then(function(data) {
+        $scope.recordTypes = data;
+        return Client.getClient($routeParams.id);
+      })
+      .then(function(data) {
         $scope.client = data;
-        $scope.calculateChildSupport();
-      }, function(error) {
+        return ClientRecord.getByClientId($scope.client.id);
+      }, function() {
         $location.path('/');
-      });
+      })
+      .then(function(records) {
+        $scope.clientRecords = records;
 
-      ClientRecord.getByClientId($routeParams.id).then(function(records) {
-        $scope.client_records = records;
+        $scope.calculateChildSupport();
       });
 
       $scope.addClientRecord = function() {
         ClientRecord.newClientRecord($scope.client.id, {
           amount: 0
         }).then(function(newRecord) {
-          $scope.client_records.push(newRecord);
-        })
+          $scope.clientRecords.push(newRecord);
+        });
       };
 
       $scope.onClientChanged = function() {
@@ -66,7 +69,7 @@ angular.module('childSupportApp')
           })[0][numChildren]);
 
           var difference = scheduleHigh - scheduleLow;
-          var newPayment = ((difference * (totalIncome - roundedIncome) / 50) + scheduleLow)*1.5;
+          var newPayment = ((difference * (totalIncome - roundedIncome) / 50) + scheduleLow) * 1.5;
           var clientIncomePercent = adjustedIncomeClient / totalIncome;
           var spouseIncomePercent = 1 - clientIncomePercent;
 
@@ -81,13 +84,13 @@ angular.module('childSupportApp')
 
           var calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
 
-          if(calculatedSupport < 0){
+          if (calculatedSupport < 0) {
             var prefix = 'Your client pays $';
-          }else{
+          } else {
             var prefix = 'Your client receives $';
           }
 
-          $scope.calculatedSupport = prefix+Math.abs(calculatedSupport).toFixed(2)+'/mo';
+          $scope.calculatedSupport = prefix + Math.abs(calculatedSupport).toFixed(2) + '/mo';
         });
       };
     }
