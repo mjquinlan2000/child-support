@@ -1,7 +1,9 @@
 angular.module('childSupportApp')
-  .controller('ClientEditCtrl', ['$scope', '$timeout', '$routeParams', '$location', '$log', 'Client', 'Gender', 'ClientRecord', 'RecordType', 'SupportSchedule',
-    function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType, SupportSchedule) {
+  .controller('ClientEditCtrl', ['$scope', '$timeout', '$routeParams', '$location', '$log', 'Client', 'Gender', 'ClientRecord', 'RecordType', 'SupportSchedule', 'BackReferenceService',
+    function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType, SupportSchedule, BackReferenceService) {
       'use strict';
+
+      BackReferenceService.backReference = '#/';
 
       $scope.recordTimeouts = {};
       Gender.then(function(data) {

@@ -7,10 +7,15 @@
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body{'ng-app' => 'childSupportApp'}
     -# application layout styled for Bootstrap 2.3
     / %header
     /   = render 'layouts/navigation'
     %main{:role => "main"}
-      .container{'ng-app' => 'childSupportApp', 'ng-view' => true}
+      %navbar.navbar.navbar-default.navbar-fixed-top.col-sm-12
+        %ul.nav.navbar-nav.pull-right
+          %li
+            %a{'ng-href' => '{{referenceService.backReference}}', 'ng-show' => 'referenceService.backReference'} BACK
+      .content
+        .container{'ng-view' => true}
       %footer

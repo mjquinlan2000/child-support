@@ -14,4 +14,5 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize'])
           redirectTo: '/'
         });
     }
-  ]);
+  ])
+  .value('BackReferenceService', {});

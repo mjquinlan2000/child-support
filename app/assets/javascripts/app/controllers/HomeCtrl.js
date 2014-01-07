@@ -1,7 +1,11 @@
 angular.module('childSupportApp')
-  .controller('HomeCtrl', ['$scope', '$location', '$log', 'Client',
-    function($scope, $location, $log, Client) {
+  .controller('HomeCtrl', ['$scope', '$location', '$log', 'Client', 'BackReferenceService',
+    function($scope, $location, $log, Client, BackReferenceService) {
+      'use strict';
+
       $scope.clients = [];
+
+      BackReferenceService.backReference = null;
 
       Client.all()
         .then(function(data) {
