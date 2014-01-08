@@ -29,6 +29,14 @@
     cursor: pointer;
 }
 
+.switch-button-background.on {
+    background: red;
+}
+
+.switch-button-background.off {
+    background: green;
+}
+
 .switch-button-button {
     position: absolute;
 

@@ -266,7 +266,7 @@
                     this.off_label.hide();
                     this.on_label.show();
                 }
-                this.button_bg.addClass("checked");
+                this.button_bg.addClass("checked").addClass("on").removeClass("off");
 
             }
             else {
@@ -286,7 +286,7 @@
                     this.off_label.show();
                     this.on_label.hide();
                 }
-                this.button_bg.removeClass("checked");
+                this.button_bg.removeClass("checked").addClass("off").removeClass("on");
             }
             // Animate the switch
             this.button.animate({ left: newLeft }, 250, "easeInOutCubic");

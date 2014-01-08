@@ -1,55 +1,46 @@
 .row
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Name
     %input.form-control{type: 'text', 'ng-model' => 'client.name', 'ng-change' => 'onClientChanged()'}
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Gender
     %select.form-control{'ng-model' => 'client.gender_id', 'ng-options' => 'gender.id as gender.name for gender in genders', 'ng-change' => 'onClientChanged()'}
 
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label No. Children
     %input.form-control{type: 'number', 'ng-model' => 'client.children', 'ng-change' => 'onClientChanged()'}
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Overnights
     %input.form-control{type: 'number', 'ng-model' => 'client.overnights', 'ng-change' => 'onClientChanged()'}
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Monthly Income
     %input.form-control{type: 'number', 'ng-model' => 'client.income', 'ng-change' => 'onClientChanged()'}
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Spouse's Monthly Income
     %input.form-control{type: 'number', 'ng-model' => 'client.spouse_income', 'ng-change' => 'onClientChanged()'}
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Paid
     %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_paid', 'ng-change' => 'onClientChanged()'}
-  %div.edit-client-row.col-sm-6.col-lg-4
+  .edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Received
     %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()'}
-.row
-  .edit-client-row.col-sm-6.col-lg-4
-    .row
-      %div.edit-client-row.col-xs-5
-        %label Label
-        %input.form-control{type: 'text', 'ng-model' => 'record.name'}
-      %div.edit-client-row.col-xs-4
-        %label Amount
-        %input.form-control{type: 'number', 'ng-model' => 'record.amount'}
-      %div.edit-client-row.col-xs-3
-        %label +/-
-        .switch-wrapper
-          %input{'switch-box' => true, type: 'checkbox', 'ng-model' => 'record.is_subtracted'}
+  .edit-client-row.col-sm-6.col-lg-4{'ng-repeat' => 'record in clientRecords'}
+    .other-adjustment
+      .row
+        .col-xs-12
+          %label Label
+          %input.form-control{type: 'text', 'ng-model' => 'record.name', 'ng-change' => 'onClientRecordChanged(record)'}
+      .row
+        .col-xs-5
+          %label Amount
+          %input.form-control{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)'}
+        .col-xs-2
+          %label {{record.is_subtracted && 'Subt.' || 'Add.'}}
+          .switch-wrapper
+            %input{type: 'checkbox', 'ng-model' => 'record.is_subtracted', 'ng-change' => 'onClientRecordChanged(record)', 'ng-checked' => 'record.is_subtracted'}
+        .col-xs-5
+          %button.btn.btn-danger{'ng-click' => 'removeClientRecord(record)'} Remove
+  .edit-client-row.col-sm-12
+    %button.btn.btn-success.add-button.pull-right{'ng-click' => 'addClientRecord()'} Add Other Adjustment
 .row
   %h3.col-sm-12 {{calculatedSupport}}
-
-  / %table.table.table-striped
-  /   %thead
-  /     %tr
-  /       %th Type
-  /       %th Amount
-  /   %tbody
-  /     %tr{'ng-repeat' => 'record in client_records'}
-  /       %td
-  /         %select{'ng-model' => 'record.record_type_id', 'ng-options' => 'rt.id as rt.name for rt in record_types', 'ng-change' => 'onClientRecordChanged(record)'}
-  /       %td
-  /         %input{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)'}
-
-  / %button.btn.add-button.pull-right{'ng-click' => 'addClientRecord()'} ADD ENTRY
