@@ -1,5 +1,4 @@
 class Api::ClientRecordsController < ApplicationController
-
   def index
     @client_records = ClientRecord.where(client_id: params[:client_id])
   end
@@ -16,5 +15,15 @@ class Api::ClientRecordsController < ApplicationController
     @client_record.update_attributes(params[:client_record])
 
     render :show, formats: [:json]
+  end
+
+  def destroy
+    @client = ClientRecord.find(params[:id])
+
+    @client.destroy
+
+    respond_to do |f|
+      f.json { head :ok }
+    end
   end
 end

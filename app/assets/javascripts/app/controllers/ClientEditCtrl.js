@@ -46,6 +46,14 @@ angular.module('childSupportApp')
         }, 3000);
       };
 
+      $scope.removeClientRecord = function(record){
+        ClientRecord.deleteClientRecord($scope.client.id, record).then(function(){
+          $scope.clientRecords = _.reject($scope.clientRecords, function(cr){
+            return record.id === cr.id;
+          });
+        });
+      };
+
       $scope.calculateChildSupport = function() {
         var adjustedIncomeClient =
           $scope.client.income + $scope.client.maintenance_received - $scope.client.maintenance_paid;

@@ -37,6 +37,20 @@ angular.module('childSupportApp')
             });
 
           return deferred.promise;
+        },
+        deleteClientRecord: function(clientId, params) {
+          var deferred = $q.defer();
+
+          $http.delete('/api/clients/' + clientId + '/client_records/' + params.id + '.json', params)
+            .success(function(data){
+              deferred.resolve(data);
+            })
+            .error(function(error){
+              $log.error('Failed to delete client record with id' + clientId);
+              deferred.reject(error);
+            });
+
+          return deferred.promise;
         }
       };
     }
