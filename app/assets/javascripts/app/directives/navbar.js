@@ -5,16 +5,15 @@ angular.module('childSupportApp')
     return {
       restrict: 'E',
       scope: true,
-      controller: ['$scope', 'BackReferenceService',
-        function($scope, BackReferenceService) {
-          $scope.referenceService = BackReferenceService;
-          // $scope.$on('$locationChangeStart', function(event, newVal, oldVal){
-          //   if($location.path() === '/' || ){
-          //     BackReferenceService.backReference = null;
-          //   } else {
-          //     BackReferenceService.backReference = oldVal;
-          //   }
-          // });
+      templateUrl: 'pages/navbar_template.html',
+      controller: ['$scope', 'NavInfo',
+        function($scope, NavInfo) {
+          $scope.navInfo = NavInfo;
+
+          $scope.$on('$locationChangeStart', function(){
+            $scope.navInfo.backReference = null;
+            $scope.navInfo.title = null;
+          });
         }
       ]
     };

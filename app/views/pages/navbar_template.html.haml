@@ -1,0 +1,7 @@
+.cs-navbar
+  %ul.cs-nav.cs-navbar-left
+    %li
+      %a.cs-navbar-title {{navInfo.title}}
+  %ul.cs-nav.cs-navbar-right
+    %li
+      %a{'ng-href' => '{{navInfo.backReference}}', 'ng-show' => 'navInfo.backReference'} BACK

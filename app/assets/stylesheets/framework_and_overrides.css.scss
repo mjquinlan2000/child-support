@@ -17,3 +17,39 @@
 .edit-client-row {
   margin-top: 10px;
 }
+
+.cs-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #3276b1;
+  color: #F6F6F6;
+  z-index: 5;
+
+  a {
+    color: #F6F6F6;
+    line-height: 50px;
+  }
+
+  ul.cs-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    &.cs-navbar-right {
+      float: right;
+      margin-right: 15px;
+    }
+    &.cs-navbar-left {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+
+  a.cs-navbar-title {
+    font-size: 25px;
+  }
+
+
+}

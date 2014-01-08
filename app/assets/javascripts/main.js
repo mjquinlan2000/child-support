@@ -1,6 +1,8 @@
 angular.module('childSupportApp', ['ngRoute', 'ngSanitize'])
   .config(['$routeProvider',
     function($routeProvider) {
+      'use strict';
+
       $routeProvider
         .when('/', {
           controller: 'HomeCtrl',
@@ -15,4 +17,4 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize'])
         });
     }
   ])
-  .value('BackReferenceService', {});
+  .value('NavInfo', {});

@@ -12,10 +12,7 @@
     / %header
     /   = render 'layouts/navigation'
     %main{:role => "main"}
-      %navbar.navbar.navbar-default.navbar-fixed-top.col-sm-12
-        %ul.nav.navbar-nav.pull-right
-          %li
-            %a{'ng-href' => '{{referenceService.backReference}}', 'ng-show' => 'referenceService.backReference'} BACK
+      %navbar
       .content
         .container{'ng-view' => true}
       %footer
