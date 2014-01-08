@@ -14,12 +14,11 @@
 ActiveRecord::Schema.define(:version => 20140108032051) do
 
   create_table "client_records", :force => true do |t|
-    t.integer  "client_id",                        :null => false
-    t.integer  "record_type_id"
+    t.integer  "client_id",                       :null => false
     t.float    "amount"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.boolean  "is_subtracted",  :default => true, :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_subtracted", :default => true, :null => false
     t.string   "name"
   end
 
