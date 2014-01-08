@@ -7,6 +7,8 @@ angular.module('childSupportApp')
       NavInfo.title = 'Editing';
 
       $scope.recordTimeouts = {};
+      $scope.statuteYear = 2014;
+
       Gender.then(function(data) {
         $scope.genders = data;
         return Client.getClient($routeParams.id);
@@ -65,7 +67,7 @@ angular.module('childSupportApp')
 
         var totalIncome = $scope.client.income + $scope.client.spouse_income;
 
-        SupportSchedule.then(function(schedule) {
+        SupportSchedule.getByYear($scope.statuteYear).then(function(schedule) {
           var roundedIncome = parseInt(totalIncome / 50) * 50;
           if (roundedIncome < 1100) roundedIncome = 0;
           var numChildren = Math.min(6, $scope.client.children);

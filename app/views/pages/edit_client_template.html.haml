@@ -24,6 +24,11 @@
   .edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Received
     %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()'}
+  .edit-client-row.col-sm-6.col-lg-4
+    %label Statute Year
+    %select.form-control{type: 'number', 'ng-model' => 'statuteYear', 'ng-change' => 'calculateChildSupport()'}
+      %option{value: 2014} 2014
+      %option{value: 2013} 2013
 .row
   .edit-client-row.col-sm-6.col-lg-4{'ng-repeat' => 'record in clientRecords'}
     .other-adjustment
