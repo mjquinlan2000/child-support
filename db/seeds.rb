@@ -20,8 +20,3 @@ user.add_role :admin
 ['Female', 'Male'].each do |name|
   Gender.find_or_create_by_name name: name
 end
-
-RecordType.find_or_create_by_name(name: 'Maintenance Paid to Spouse')
-RecordType.find_or_create_by_name(name: 'Maintenance Received from Spouse', is_subtracted: false)
-RecordType.find_or_create_by_name(name: 'Child Health Insurance Paid')
-RecordType.find_or_create_by_name(name: 'Child Health Insurance Received', is_subtracted: false)

@@ -1,6 +1,6 @@
 angular.module('childSupportApp')
-  .controller('ClientEditCtrl', ['$scope', '$timeout', '$routeParams', '$location', '$log', 'Client', 'Gender', 'ClientRecord', 'RecordType', 'SupportSchedule', 'NavInfo',
-    function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, RecordType, SupportSchedule, NavInfo) {
+  .controller('ClientEditCtrl', ['$scope', '$timeout', '$routeParams', '$location', '$log', 'Client', 'Gender', 'ClientRecord', 'SupportSchedule', 'NavInfo',
+    function($scope, $timeout, $routeParams, $location, $log, Client, Gender, ClientRecord, SupportSchedule, NavInfo) {
       'use strict';
 
       NavInfo.backReference = '#/';
@@ -9,10 +9,6 @@ angular.module('childSupportApp')
       $scope.recordTimeouts = {};
       Gender.then(function(data) {
         $scope.genders = data;
-        return RecordType;
-      })
-      .then(function(data) {
-        $scope.recordTypes = data;
         return Client.getClient($routeParams.id);
       })
       .then(function(data) {

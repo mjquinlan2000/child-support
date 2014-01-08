@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.core
+//= require jquery.ui.widget
+//= require jquery/jquery.ui.switchButton
 //= require bootstrap/bootstrap
 //= require angularjs/angular
 //= require angularjs/angular-route

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20140108032051) do
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.boolean  "is_subtracted",  :default => true, :null => false
+    t.string   "name"
   end
 
   create_table "clients", :force => true do |t|
@@ -38,13 +39,6 @@ ActiveRecord::Schema.define(:version => 20140108032051) do
 
   create_table "genders", :force => true do |t|
     t.string "name"
-  end
-
-  create_table "record_types", :force => true do |t|
-    t.string   "name"
-    t.boolean  "is_monetary", :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
   end
 
   create_table "roles", :force => true do |t|

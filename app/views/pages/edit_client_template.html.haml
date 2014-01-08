@@ -24,6 +24,12 @@
   %div.edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Received
     %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()'}
+.row{'ng-repeat' => 'record in clientRecords'}
+  %div.edit-client-row.col-xs-5
+    %label Name
+    %input
+  %div.edit-client-row.col-xs-5
+  %div.edit-client-row.col-xs-2
 .row
   %h3.col-sm-12 {{calculatedSupport}}
 
