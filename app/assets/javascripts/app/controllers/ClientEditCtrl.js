@@ -52,6 +52,7 @@ angular.module('childSupportApp')
           $scope.clientRecords = _.reject($scope.clientRecords, function(cr){
             return record.id === cr.id;
           });
+          $scope.calculateChildSupport();
         });
       };
 
