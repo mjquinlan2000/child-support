@@ -44,6 +44,7 @@ angular.module('childSupportApp')
         $scope.recordTimeouts[record.id] = $timeout(function() {
           ClientRecord.updateClientRecord($scope.client.id, record);
         }, 3000);
+        $scope.calculateChildSupport();
       };
 
       $scope.removeClientRecord = function(record){
@@ -68,11 +69,11 @@ angular.module('childSupportApp')
           if (roundedIncome < 1100) roundedIncome = 0;
           var numChildren = Math.min(6, $scope.client.children);
           var scheduleLow = parseInt(_.filter(schedule, function(entry) {
-            return parseInt(entry.income) == roundedIncome;
+            return parseInt(entry.income) === roundedIncome;
           })[0][numChildren]);
 
           var scheduleHigh = parseInt(_.filter(schedule, function(entry) {
-            return parseInt(entry.income) == roundedIncome + 50;
+            return parseInt(entry.income) === roundedIncome + 50;
           })[0][numChildren]);
 
           var difference = scheduleHigh - scheduleLow;
@@ -88,6 +89,25 @@ angular.module('childSupportApp')
 
           var clientObligationWithTime = spouseOvernightPercent * clientSupportObligation;
           var spouseObligationWithTime = clientOvernightPercent * spouseSupportObligation;
+
+          var clientAdjustments = 0;
+          var spouseAdjustments = 0;
+
+          _.each($scope.clientRecords, function(record){
+            if(record.is_subtracted){
+              clientAdjustments += record.amount;
+            } else {
+              spouseAdjustments += record.amount;
+            }
+          });
+
+          var totalAdjustments = clientAdjustments + spouseAdjustments;
+
+          var clientAdjustedAmount = clientAdjustments * clientIncomePercent;
+          var spouseAdjustedAmount = spouseAdjustments * spouseIncomePercent;
+
+          clientObligationWithTime -= Math.max(clientAdjustments - clientAdjustedAmount, 0);
+          spouseObligationWithTime -= Math.max(spouseAdjustments - spouseAdjustedAmount, 0);
 
           var calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
 
