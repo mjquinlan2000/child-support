@@ -1,7 +1,9 @@
 .cs-navbar
-  %ul.cs-nav.cs-navbar-left
-    %li
-      %a.cs-navbar-title {{navInfo.title}}
-  %ul.cs-nav.cs-navbar-right
-    %li
-      %a{'ng-href' => '{{navInfo.backReference}}', 'ng-show' => 'navInfo.backReference'} BACK
+  .container
+    .row
+      .col-sm-12
+        .pull-left.cs-navbar-title {{navInfo.title}}
+        %a.pull-right{'ng-href' => '{{navInfo.backReference}}', 'ng-show' => 'navInfo.backReference'} BACK
+  / %ul.cs-nav.cs-navbar-right
+  /   %li
+  /     %a{'ng-href' => '{{navInfo.backReference}}', 'ng-show' => 'navInfo.backReference'} BACK
