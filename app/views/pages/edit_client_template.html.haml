@@ -24,12 +24,19 @@
   %div.edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Received
     %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()'}
-.row{'ng-repeat' => 'record in clientRecords'}
-  %div.edit-client-row.col-xs-5
-    %label Name
-    %input
-  %div.edit-client-row.col-xs-5
-  %div.edit-client-row.col-xs-2
+.row
+  .edit-client-row.col-sm-6.col-lg-4
+    .row
+      %div.edit-client-row.col-xs-5
+        %label Label
+        %input.form-control{type: 'text', 'ng-model' => 'record.name'}
+      %div.edit-client-row.col-xs-4
+        %label Amount
+        %input.form-control{type: 'number', 'ng-model' => 'record.amount'}
+      %div.edit-client-row.col-xs-3
+        %label +/-
+        .switch-wrapper
+          %input{'switch-box' => true, type: 'checkbox', 'ng-model' => 'record.is_subtracted'}
 .row
   %h3.col-sm-12 {{calculatedSupport}}
 

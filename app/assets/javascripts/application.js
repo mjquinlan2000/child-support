@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.core
 //= require jquery.ui.widget
+//= require jquery.ui.effect.all
 //= require jquery/jquery.ui.switchButton
 //= require bootstrap/bootstrap
 //= require angularjs/angular
