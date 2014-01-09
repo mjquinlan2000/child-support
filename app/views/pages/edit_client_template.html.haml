@@ -8,25 +8,25 @@
 
   .edit-client-row.col-sm-6.col-lg-4
     %label No. Children
-    %input.form-control{type: 'number', 'ng-model' => 'client.children', 'ng-change' => 'onClientChanged()'}
+    %input.form-control{type: 'number', 'ng-model' => 'client.children', 'ng-change' => 'onClientChanged()', min: '0'}
   .edit-client-row.col-sm-6.col-lg-4
     %label Overnights
-    %input.form-control{type: 'number', 'ng-model' => 'client.overnights', 'ng-change' => 'onClientChanged()'}
+    %input.form-control{type: 'number', 'ng-model' => 'client.overnights', 'ng-change' => 'onClientChanged()', min: '0', max: '365'}
   .edit-client-row.col-sm-6.col-lg-4
     %label Monthly Income
-    %input.form-control{type: 'number', 'ng-model' => 'client.income', 'ng-change' => 'onClientChanged()'}
+    %input.form-control{type: 'number', 'ng-model' => 'client.income', 'ng-change' => 'onClientChanged()', min: '0'}
   .edit-client-row.col-sm-6.col-lg-4
     %label Spouse's Monthly Income
-    %input.form-control{type: 'number', 'ng-model' => 'client.spouse_income', 'ng-change' => 'onClientChanged()'}
+    %input.form-control{type: 'number', 'ng-model' => 'client.spouse_income', 'ng-change' => 'onClientChanged()', min: '0'}
   .edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Paid
-    %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_paid', 'ng-change' => 'onClientChanged()'}
+    %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_paid', 'ng-change' => 'onClientChanged()', min: '0'}
   .edit-client-row.col-sm-6.col-lg-4
     %label Maintenance Received
-    %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()'}
+    %input.form-control{type: 'number', 'ng-model' => 'client.maintenance_received', 'ng-change' => 'onClientChanged()', min: '0'}
   .edit-client-row.col-sm-6.col-lg-4
     %label Statute Year
-    %select.form-control{type: 'number', 'ng-model' => 'statuteYear', 'ng-change' => 'calculateChildSupport()'}
+    %select.form-control{type: 'number', 'ng-model' => 'statuteYear', 'ng-change' => 'calculateChildSupport()', min: '0'}
       %option{value: 2014} 2014
       %option{value: 2013} 2013
 .row
@@ -39,7 +39,7 @@
       .row
         .col-xs-5
           %label Amount
-          %input.form-control{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)'}
+          %input.form-control{type: 'number', 'ng-model' => 'record.amount', 'ng-change' => 'onClientRecordChanged(record)', min: '0'}
         .col-xs-2
           %label {{record.is_subtracted && 'Subt.' || 'Add.'}}
           .switch-wrapper

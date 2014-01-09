@@ -62,6 +62,10 @@ angular.module('childSupportApp')
         });
       };
 
+      $scope.useWorksheetB = function(){
+        return $scope.client.overnights > 92 && $scope.client.overnights < 273;
+      };
+
       $scope.calculateChildSupport = function() {
         var adjustedIncomeClient =
           $scope.client.income + $scope.client.maintenance_received - $scope.client.maintenance_paid;
@@ -84,7 +88,10 @@ angular.module('childSupportApp')
           })[0][numChildren]);
 
           var difference = scheduleHigh - scheduleLow;
-          var newPayment = ((difference * (totalIncome - roundedIncome) / 50) + scheduleLow) * 1.5;
+          var newPayment = ((difference * (totalIncome - roundedIncome) / 50) + scheduleLow);
+          if($scope.useWorksheetB()){
+            newPayment *= 1.5;
+          }
           var clientIncomePercent = adjustedIncomeClient / totalIncome;
           var spouseIncomePercent = 1 - clientIncomePercent;
 
@@ -113,10 +120,23 @@ angular.module('childSupportApp')
           var clientAdjustedAmount = clientAdjustments * clientIncomePercent;
           var spouseAdjustedAmount = spouseAdjustments * spouseIncomePercent;
 
-          clientObligationWithTime -= Math.max(clientAdjustments - clientAdjustedAmount, 0);
-          spouseObligationWithTime -= Math.max(spouseAdjustments - spouseAdjustedAmount, 0);
+          var calculatedSupport;
 
-          var calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
+          if($scope.useWorksheetB()){
+            clientObligationWithTime -= Math.max(clientAdjustments - clientAdjustedAmount, 0);
+            spouseObligationWithTime -= Math.max(spouseAdjustments - spouseAdjustedAmount, 0);
+            calculatedSupport = spouseObligationWithTime - clientObligationWithTime;
+          } else {
+            clientObligationWithTime += Math.max(clientAdjustments - clientAdjustedAmount, 0);
+            spouseObligationWithTime += Math.max(spouseAdjustments - spouseAdjustedAmount, 0);
+
+            if($scope.client.overnights <= 92){
+              calculatedSupport = -(clientObligationWithTime - clientAdjustments);
+            } else {
+              calculatedSupport = spouseObligationWithTime - spouseAdjustments;
+            }
+          }
+
 
           if (calculatedSupport < 0) {
             var prefix = 'Your client pays $';
