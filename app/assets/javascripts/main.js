@@ -1,4 +1,4 @@
-angular.module('childSupportApp', ['ngRoute', 'ngSanitize'])
+angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
   .config(['$routeProvider',
     function($routeProvider) {
       'use strict';

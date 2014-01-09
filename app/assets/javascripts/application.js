@@ -20,6 +20,7 @@
 //= require angularjs/angular
 //= require angularjs/angular-route
 //= require angularjs/angular-sanitize
+//= require angularjs/angular-resource
 //= require underscore/underscore
 //= require main
 //= require_tree ./app
