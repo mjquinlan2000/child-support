@@ -11,9 +11,8 @@ ChildSupport::Application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
   namespace :api, default: {format: :json} do
-    resources :genders
-    # resources :record_types
-    # resources :client_records
+    resources :genders, only: [:index]
+    resources :record_types, only: [:index]
     resources :clients do
       resources :client_records
     end

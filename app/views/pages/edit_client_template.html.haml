@@ -35,7 +35,7 @@
       .row
         .col-xs-12
           %label Label
-          %input.form-control{type: 'text', 'ng-model' => 'record.name', 'ng-change' => 'onClientRecordChanged(record)'}
+          %select.form-control{type: 'text', 'ng-model' => 'record.record_type_id', 'ng-change' => 'onClientRecordChanged(record)', 'ng-options' => 'r.id as r.name for r in recordTypes'}
       .row
         .col-xs-5
           %label Amount

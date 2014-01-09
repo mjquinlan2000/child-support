@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140108032051) do
+ActiveRecord::Schema.define(:version => 20140109033550) do
 
   create_table "client_records", :force => true do |t|
-    t.integer  "client_id",                       :null => false
+    t.integer  "client_id",                        :null => false
     t.float    "amount"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "is_subtracted", :default => true, :null => false
-    t.string   "name"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "is_subtracted",  :default => true, :null => false
+    t.integer  "record_type_id"
   end
 
   create_table "clients", :force => true do |t|
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(:version => 20140108032051) do
 
   create_table "genders", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "record_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|

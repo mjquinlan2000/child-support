@@ -20,3 +20,9 @@ user.add_role :admin
 ['Female', 'Male'].each do |name|
   Gender.find_or_create_by_name name: name
 end
+
+record_types = ['Healthcare', 'Healthcare (uninsured)', 'Education', 'Other Adjustment']
+
+record_types.each do |type|
+  RecordType.find_or_create_by_name name: type
+end

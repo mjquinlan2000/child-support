@@ -4,5 +4,5 @@ json.(
   :client_id,
   :is_subtracted,
   :amount,
-  :name
+  :record_type_id
 )
