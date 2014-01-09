@@ -1,4 +1,12 @@
 angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
+  .config(['$httpProvider',
+    function($httpProvider) {
+      'use strict';
+
+      var authToken = $('meta[name="csrf-token"]').attr('content');
+      $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
+    }
+  ])
   .config(['$routeProvider',
     function($routeProvider) {
       'use strict';
