@@ -4,7 +4,8 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
       'use strict';
 
       var authToken = $('meta[name="csrf-token"]').attr('content');
-      $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
+      $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = authToken;
+      $httpProvider.defaults.headers.common['authenticity_token'] = authToken;
     }
   ])
   .config(['$routeProvider',
@@ -19,6 +20,10 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
         .when('/clients/:id', {
           controller: 'ClientEditCtrl',
           templateUrl: 'pages/edit_client_template.html'
+        })
+        .when('/sign_in/', {
+          controller: 'SignInCtrl',
+          templateUrl: 'pages/sign_in_template.html'
         })
         .otherwise({
           redirectTo: '/'
