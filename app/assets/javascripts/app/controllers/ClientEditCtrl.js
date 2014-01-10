@@ -20,8 +20,6 @@ angular.module('childSupportApp')
       Client.getClient($routeParams.id).then(function(data) {
         $scope.client = data;
         return ClientRecord.getByClientId($scope.client.id);
-      }, function() {
-        $location.path('/');
       })
       .then(function(records) {
         $scope.clientRecords = records;

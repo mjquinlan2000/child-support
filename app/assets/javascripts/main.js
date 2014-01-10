@@ -13,10 +13,8 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
 
           function error(response) {
             if (response.status === 401) {
-              console.log('401 bitches');
               $rootScope.$broadcast('event:unauthorized');
               $location.path('/users/sign_in');
-              return $q.reject(response);
             }
             return $q.reject(response);
           }
@@ -38,6 +36,10 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
           controller: 'HomeCtrl',
           templateUrl: 'pages/home_template.html'
         })
+        .when('/clients', {
+          controller: 'ClientsCtrl',
+          templateUrl: '/pages/clients_template.html'
+        })
         .when('/clients/:id', {
           controller: 'ClientEditCtrl',
           templateUrl: 'pages/edit_client_template.html'
@@ -46,8 +48,8 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
           templateUrl: '/pages/sign_in_template.html',
           controller: 'UsersCtrl'
         })
-        .when('/users/register', {
-          templateUrl: '/pages/sign_up.html',
+        .when('/users/sign_up', {
+          templateUrl: '/pages/sign_up_template.html',
           controller: 'UsersCtrl'
         })
         .otherwise({

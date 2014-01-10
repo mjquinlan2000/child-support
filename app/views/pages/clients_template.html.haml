@@ -1,0 +1,13 @@
+.row
+  %table.table.table-striped.home-client-table.col-sm-12
+    %tbody
+      %tr{'ng-repeat' => 'client in clients'}
+        %td {{client.name}}
+        %td
+          %a.btn.btn-primary.pull-right.edit-button{href: '#/clients/{{client.id}}'} EDIT
+          %button.btn.btn-danger.pull-right.delete-button{'ng-click' => 'deleteClient(client)'} DELETE
+      %tr
+        %td{colspan: "2"}
+          %button.btn-success.pull-right.btn.add-client-button{'ng-click' => 'addNewClient()'}
+            %i.icon-plus
+            %span ADD CLIENT

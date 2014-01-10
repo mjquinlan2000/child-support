@@ -10,5 +10,9 @@ angular.module('childSupportApp')
       $scope.signIn = function() {
         Session.signIn($scope.user.email, $scope.user.password);
       };
+
+      $scope.signOut = function(){
+        return Session.signOut();
+      };
     }
   ]);

@@ -1,4 +1,6 @@
 class Api::ClientRecordsController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @client_records = ClientRecord.where(client_id: params[:client_id])
   end

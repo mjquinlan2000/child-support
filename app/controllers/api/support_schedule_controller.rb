@@ -1,6 +1,8 @@
 class Api::SupportScheduleController < ApplicationController
   require 'csv'
 
+  before_filter :authenticate_user!
+
   def show
     puts params
     csv_text = File.read('lib/assets/meta/support_schedule_'+params[:year]+'.csv')
