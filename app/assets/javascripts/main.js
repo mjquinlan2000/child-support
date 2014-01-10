@@ -3,9 +3,30 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
     function($httpProvider) {
       'use strict';
 
-      var authToken = $('meta[name="csrf-token"]').attr('content');
-      $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = authToken;
-      $httpProvider.defaults.headers.common['authenticity_token'] = authToken;
+      $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+
+      var interceptor = ['$location', '$rootScope', '$q',
+        function($location, $rootScope, $q) {
+          function success(response) {
+            return response;
+          }
+
+          function error(response) {
+            if (response.status === 401) {
+              console.log('401 bitches');
+              $rootScope.$broadcast('event:unauthorized');
+              $location.path('/users/sign_in');
+              return $q.reject(response);
+            }
+            return $q.reject(response);
+          }
+
+          return function(promise) {
+            return promise.then(success, error);
+          };
+        }
+      ];
+      $httpProvider.responseInterceptors.push(interceptor);
     }
   ])
   .config(['$routeProvider',
@@ -21,9 +42,13 @@ angular.module('childSupportApp', ['ngRoute', 'ngSanitize', 'ngResource'])
           controller: 'ClientEditCtrl',
           templateUrl: 'pages/edit_client_template.html'
         })
-        .when('/sign_in/', {
-          controller: 'SignInCtrl',
-          templateUrl: 'pages/sign_in_template.html'
+        .when('/users/sign_in', {
+          templateUrl: '/pages/sign_in_template.html',
+          controller: 'UsersCtrl'
+        })
+        .when('/users/register', {
+          templateUrl: '/pages/sign_up.html',
+          controller: 'UsersCtrl'
         })
         .otherwise({
           redirectTo: '/'

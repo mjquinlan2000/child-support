@@ -1,10 +1,11 @@
 ChildSupport::Application.routes.draw do
-  # authenticated :user do
-  #   root :to => 'home#index'
-  # end
   root to: 'home#index'
 
-  devise_for :users
+  devise_for :users, controllers: {sessions: 'sessions'}
+
+  devise_scope :user do
+    get "users/current_user", to: "sessions#show_current_user"
+  end
 
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
