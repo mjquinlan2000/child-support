@@ -3,6 +3,7 @@
     .row
       .col-sm-12
         .pull-left.cs-navbar-title {{navInfo.title}}
+        %a.pull-right.signOutButton{href: '#'} Sign Out
         %a.pull-right{'ng-href' => '{{navInfo.backReference}}', 'ng-show' => 'navInfo.backReference'} BACK
   / %ul.cs-nav.cs-navbar-right
   /   %li

@@ -40,10 +40,11 @@ angular.module('childSupportApp')
         $http.delete('/users/sign_out')
           .success(function() {
             _this.currentUser = null;
+            console.log('redirectin');
             redirect(redirectTo);
           });
       };
-      Session.prototype.register = function(email, password, confirmPassword) {
+      Session.prototype.signUp = function(email, password, confirmPassword) {
         var deferred = $q.defer();
         $http.post('/users.json', {
           user: {
@@ -64,7 +65,7 @@ angular.module('childSupportApp')
       };
       Session.prototype.requestCurrentUser = function() {
         var deferred = $q.defer();
-        if (this.isAuthenticated()) {
+        if (false && this.isAuthenticated()) {
           deferred.resolve(this.currentUser);
         } else {
           $http.get('/users/current_user')
@@ -73,7 +74,6 @@ angular.module('childSupportApp')
               deferred.resolve(_this.currentUser);
             })
             .error(function(error) {
-              $log.error('Could not get current user ' + error);
               deferred.reject(error);
             });
         }
